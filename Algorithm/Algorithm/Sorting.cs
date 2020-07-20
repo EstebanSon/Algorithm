@@ -62,6 +62,11 @@ namespace Algorithm
             return data;
         }
 
+        public void SortingFunc(int[] init, int[] end)
+        {
+
+        }
+
         public static int[] BubbleSort(int[] data)
         {
             for (int i = 0; i < data.Length; i++)
