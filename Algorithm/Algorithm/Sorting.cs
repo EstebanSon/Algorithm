@@ -43,22 +43,60 @@ namespace Algorithm
             return data;
         }
 
-        public static int[] MergeSort(int[] data)
+        public static int[] MergeSort(int[] data, int init, int end)
         {
-            int half = data.Length / 2;
-            int top = data.Length - half;
-            int bot = data.Length - top;
+            if (init >= end)
+                return data;
 
-            for(int i = 0; i < data.Length; i += 2)
+            int mid = end - 1 / 2;
+            MergeSort(data, init, mid);
+            MergeSort(data, mid + 1, end);
+
+            int num1 = mid + 1 - init;
+            int num2 = end - mid;
+
+            int[] left = new int[num1], right = new int[num2];
+
+            for (int i = 0; i < num1; i++)
+                left[i] = data[init + i];
+
+
+            for (int i = 0; i < num2; i++)
+                right[i] = data[mid + i];
+
+            int j = 0, z = 0;
+            int k = init;
+
+            while(z < num1 && j < num2)
             {
-                if(data[i+1] < data[i])
+                if(left[z] <= right[num2])
                 {
-                    int temp = data[i+1];
-                    data[i+1] = data[i];
-                    data[i] = temp;
+                    data[k] = left[z];
+                    z++;
+                    k++;
+                }
+                else
+                {
+                    data[k] = right[j];
+                    j++;
+                    k++;
                 }
             }
-            
+
+            while(j< num1)
+            {
+                data[k] = left[z];
+                z++;
+                k++;
+            }
+
+            while(j < num2)
+            {
+                data[k] = right[j];
+                j++;
+                k++;
+            }
+
             return data;
         }
 
